@@ -1,6 +1,5 @@
-package com.example.duoapp.fragments;
+package com.example.duoapp.fragmentsCursos;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
