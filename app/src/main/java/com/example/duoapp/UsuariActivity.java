@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.example.duoapp.fragmentsCursos.MeusCursos;
+import com.example.duoapp.fragmentsUsuari.PerfilUsuari;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class UsuariActivity extends AppCompatActivity {
@@ -43,5 +45,15 @@ public class UsuariActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        if (findViewById(R.id.cursos_fragment_container) != null) {
+            if (savedInstanceState != null) {
+                return;
+            }
+
+            PerfilUsuari firstFragment = new PerfilUsuari();
+            firstFragment.setArguments(getIntent().getExtras());
+            getSupportFragmentManager().beginTransaction().add(R.id.cursos_fragment_container, firstFragment).commit();
+        }
     }
 }

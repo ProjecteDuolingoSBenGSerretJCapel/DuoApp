@@ -1,4 +1,4 @@
-package com.example.duoapp.fragments;
+package com.example.duoapp.fragmentsCursos;
 
 import android.os.Bundle;
 
