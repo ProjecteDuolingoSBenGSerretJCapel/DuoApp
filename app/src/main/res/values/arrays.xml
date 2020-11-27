@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="idiomes">
+        <item>Arab</item>
+        <item>Catala</item>
+        <item>Castella</item>
+        <item>Portuges</item>
+        <item>Frances</item>
+    </string-array>
+    
+    <string-array name="meusIdiomes">
+        <item>Angles</item>
+    </string-array>
+</resources>

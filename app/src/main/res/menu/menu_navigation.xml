@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/cursos"
+        android:title="Cursos"
+        android:icon="@drawable/ic_cursos"
+        />
+
+    <item
+        android:id="@+id/usuari"
+        android:title="Usuari"
+        android:icon="@drawable/ic_usuari"
+        />
+
+    <item
+        android:id="@+id/lliga"
+        android:title="Lliga"
+        android:icon="@drawable/ic_lliga"
+        />
+
+    <item
+        android:id="@+id/tenda"
+        android:title="Tenda"
+        android:icon="@drawable/ic_tenda"
+        />
+</menu>

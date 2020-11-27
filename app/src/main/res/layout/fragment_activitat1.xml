@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#373737"
+    tools:context=".fragments.Activitat1">
+
+    <!-- TODO: Update blank fragment layout -->
+    <Button
+        android:id="@+id/btSortirActivitat"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:text="X"
+        android:backgroundTint="#53BF2D"
+        android:layout_gravity="top|left"/>
+
+    <TextView
+        android:id="@+id/ultimesDiapos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
+        android:text="1/5"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:textColor="#53BF2D"/>
+
+    <TextView
+        android:id="@+id/txtExercici"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TITUL DEL EXERCICI 1"
+        android:textStyle="bold"
+        android:textSize="30dp"
+        android:textColor="#53BF2D"
+        android:layout_gravity="center"/>
+
+    <Button
+        android:id="@+id/btSeguentActivitat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seguent"
+        android:backgroundTint="#53BF2D"
+        android:layout_gravity="bottom|right"/>
+
+</FrameLayout>

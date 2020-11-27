@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DuoApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add"> + </string>
+    <string name="hint_text" />
+</resources>
