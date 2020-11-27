@@ -1,0 +1,3 @@
+[submodule "project.duolingo"]
+	path = project.duolingo
+	url = https://github.com/ProjecteDuolingoSBenGSerretJCapel/project.duolingo
