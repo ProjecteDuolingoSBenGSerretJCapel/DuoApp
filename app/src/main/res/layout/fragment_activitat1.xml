@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,34 +14,111 @@
         android:layout_height="50dp"
         android:text="X"
         android:backgroundTint="#53BF2D"
-        android:layout_gravity="top|left"/>
+        />
 
     <TextView
         android:id="@+id/ultimesDiapos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="top|right"
+
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
         android:text="1/5"
+        android:textColor="#53BF2D"
         android:textSize="30dp"
-        android:textStyle="bold"
-        android:textColor="#53BF2D"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtExercici"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TITUL DEL EXERCICI 1"
-        android:textStyle="bold"
-        android:textSize="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginEnd="114dp"
+        android:layout_marginRight="114dp"
+        android:text="INTRODUCCIO"
         android:textColor="#53BF2D"
-        android:layout_gravity="center"/>
+        android:textSize="25dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="85dp"
+        android:layout_marginLeft="85dp"
+        android:layout_marginTop="91dp"
+        android:layout_marginEnd="89dp"
+        android:layout_marginRight="89dp"
+        android:text="Quin de aquests es 'home'"
+        android:textColor="#53BF2D"
+        android:textSize="18dp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btSeguentActivitat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Seguent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|right"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
         android:backgroundTint="#53BF2D"
-        android:layout_gravity="bottom|right"/>
+        android:text="Comprobar" />
 
-</FrameLayout>
+    <Button
+        android:id="@+id/btResposta1"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="325dp"
+        android:backgroundTint="#53BF2D"
+        android:text="XXXXX" />
+
+    <Button
+        android:id="@+id/btResposta2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="53dp"
+        android:layout_marginRight="53dp"
+        android:layout_marginBottom="186dp"
+        android:backgroundTint="#53BF2D"
+        android:text="XXXXX" />
+
+    <Button
+        android:id="@+id/btResposta3"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="52dp"
+        android:layout_marginRight="52dp"
+        android:layout_marginBottom="255dp"
+        android:backgroundTint="#53BF2D"
+        android:text="XXXXX" />
+
+
+</RelativeLayout>
