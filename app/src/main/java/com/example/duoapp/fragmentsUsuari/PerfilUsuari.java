@@ -1,5 +1,6 @@
 package com.example.duoapp.fragmentsUsuari;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -81,13 +82,23 @@ public class PerfilUsuari extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Bundle bundle = getArguments();
+        View v = inflater.inflate(R.layout.fragment_perfil_usuari, container, false);
 
+        Intent intent = new Intent();
+
+        intent.getIntExtra("monedesObtingudes", mondesObtingudes);
+        intent.getIntExtra("puntsObtinguts", puntsObtinguts);
+        intent.getBooleanExtra("cambi", cambi);
+
+        /*
+        Bundle bundle = getArguments();
         if(bundle != null){
             mondesObtingudes = bundle.getInt("fetes");
             puntsObtinguts = bundle.getInt("maxim");
         }
         System.out.println(bundle);
+        */
+
 
         SXmlConfigureDAO icmanagerConfigure = new SXmlConfigureImpl();
         path ="/data/user/0/com.example.duoapp/usuariXML.xml";
@@ -115,7 +126,7 @@ public class PerfilUsuari extends Fragment {
             e.printStackTrace();
         }
         
-        View v = inflater.inflate(R.layout.fragment_perfil_usuari, container, false);
+
 
         txtIPUsuari = v.findViewById(R.id.txtIPUsuari);
         txtNomUsuari = v.findViewById(R.id.txtNomUsuari);
@@ -231,7 +242,6 @@ public class PerfilUsuari extends Fragment {
             }
         });
 
-        cambi = true;
         System.out.println(cambi);
         System.out.println(mondesObtingudes);
         System.out.println(puntsObtinguts);
