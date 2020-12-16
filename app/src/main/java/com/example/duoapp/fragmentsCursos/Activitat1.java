@@ -1,8 +1,13 @@
 package com.example.duoapp.fragmentsCursos;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -11,8 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.duoapp.MainActivity;
 import com.example.duoapp.R;
+import com.example.duoapp.fragmentsUsuari.PerfilUsuari;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.lang.reflect.Array;
@@ -23,15 +31,21 @@ import java.util.List;
 
 public class Activitat1 extends Fragment{
 
-    Button btSortir, btSeguent;
-    TextView txtTitul, txtUltimasDiapos;
+    private Button btSortir, btSeguent;
+    private TextView txtTitul, txtUltimasDiapos;
 
-    Button btResposta1, btResposta2, btResposta3;
+    private Button btResposta1, btResposta2, btResposta3;
 
-    int ultimaDiapo , maximDiapo;
+    private int ultimaDiapo , maximDiapo;
+
+    private String resposta;
 
     private String[] respostes = {"man","girl","woman"};
     private String respostaCorrecte = "man";
+
+    private boolean totCorrecte = true;
+
+    private int monedesObtingudes, puntsObtinguts;
 
     public Activitat1() {
         // Required empty public constructor
@@ -76,6 +90,8 @@ public class Activitat1 extends Fragment{
             maximDiapo = bundle.getInt("maxim");
         }
 
+        Bundle bundle1 = new Bundle();
+
         //
         txtTitul = (TextView) v.findViewById(R.id.txtExercici);
 
@@ -102,45 +118,166 @@ public class Activitat1 extends Fragment{
         btSeguent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ultimaDiapo == maximDiapo){
-                    Categories quartFragment = new Categories();
-
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    transaction.replace(R.id.cursos_fragment_container, quartFragment);
-                    transaction.addToBackStack(null);
-                    transaction.commit();
-                }
-                else{
-                    if(btSeguent.getText().equals("Comprobar")){
+                    if(resposta.equals(respostaCorrecte)){
                         btSeguent.setEnabled(false);
+                        Snackbar snackbar = Snackbar
+                                .make(container, "Correcte", Snackbar.LENGTH_LONG)
+                                .setAction("SEGUENT", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        if(ultimaDiapo == maximDiapo){
+                                            txtTitul.setText("PUNTS OBTINGUTS, "+ monedesObtingudes +" Punts, MONEDES OBTINGUDES "+ puntsObtinguts +" Monedes");
+                                            btResposta3.setText("OK");
 
-                        if(ultimaDiapo == maximDiapo-1){
-                            btSeguent.setText("Finalitzar");
-                        }
+                                            btResposta2.setVisibility(View.INVISIBLE);
+                                            btResposta1.setVisibility(View.INVISIBLE);
+                                            btSortir.setVisibility(View.INVISIBLE);
+                                            btSeguent.setVisibility(View.INVISIBLE);
 
-                        btResposta1.setBackgroundColor(Color.parseColor("#53BF2D"));
-                        btResposta2.setBackgroundColor(Color.parseColor("#53BF2D"));
-                        btResposta3.setBackgroundColor(Color.parseColor("#53BF2D"));
+                                            txtUltimasDiapos.setVisibility(View.INVISIBLE);
 
+                                            btResposta3.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    PerfilUsuari pu = new PerfilUsuari();
 
-                        ultimaDiapo += 1;
-                        txtUltimasDiapos.setText(String.valueOf(ultimaDiapo) + "/" + String.valueOf(maximDiapo));
-                        txtTitul.setText("Titol del exercici " + String.valueOf(ultimaDiapo));
+                                                    Bundle bundle = new Bundle();
+                                                    bundle.putInt("puntsObtinguts", puntsObtinguts);
+                                                    bundle.putInt("monedesObtingudes", monedesObtingudes);
+                                                    bundle.putBoolean("cambi", true);
 
-                        List<String> listRespostes = Arrays.asList(respostes);
-                        Collections.shuffle(listRespostes);
-                        listRespostes.toArray(respostes);
+                                                    pu.setArguments(bundle);
 
-                        btResposta1.setText(respostes[0]);
-                        btResposta2.setText(respostes[1]);
-                        btResposta3.setText(respostes[2]);
+                                                    Categories quartFragment = new Categories();
+
+                                                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                                    transaction.replace(R.id.cursos_fragment_container, quartFragment);
+                                                    transaction.addToBackStack(null);
+                                                    transaction.commit();
+                                                }
+                                            });
+
+                                        }
+                                        else{
+                                            int puntsRandom = (int) (Math.random()*50+50);
+                                            int monedesRandom = (int) (Math.random()*50+50);
+
+                                            puntsObtinguts += puntsRandom;
+                                            monedesObtingudes += monedesRandom;
+
+                                            //if(ultimaDiapo == 1){
+                                                if(ultimaDiapo == maximDiapo-1){
+                                                    btSeguent.setText("Finalitzar");
+                                                }
+                                                ultimaDiapo += 1;
+                                                txtUltimasDiapos.setText(String.valueOf(ultimaDiapo) + "/" + String.valueOf(maximDiapo));
+                                                txtTitul.setText("Titol del exercici " + String.valueOf(ultimaDiapo));
+
+                                                btResposta1.setBackgroundColor(Color.parseColor("#53BF2D"));
+                                                btResposta2.setBackgroundColor(Color.parseColor("#53BF2D"));
+                                                btResposta3.setBackgroundColor(Color.parseColor("#53BF2D"));
+
+                                                List<String> listRespostes = Arrays.asList(respostes);
+                                                Collections.shuffle(listRespostes);
+                                                listRespostes.toArray(respostes);
+
+                                                btResposta1.setText(respostes[0]);
+                                                btResposta2.setText(respostes[1]);
+                                                btResposta3.setText(respostes[2]);
+                                            //}
+
+                                        }
+
+                                    }
+                                });
+
+                        snackbar.show();
                     }
                     else{
+                        totCorrecte = false;
+
                         btSeguent.setEnabled(false);
+                        Snackbar snackbar = Snackbar
+                                .make(container, "Incorrecte", Snackbar.LENGTH_LONG)
+                                .setAction("SEGUENT", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        if(ultimaDiapo == maximDiapo){
+                                            monedesObtingudes += 150;
+
+                                            txtTitul.setText("PUNTS OBTINGUTS, "+ monedesObtingudes +" Punts, MONEDES OBTINGUDES "+ puntsObtinguts +" Monedes");
+                                            btResposta3.setText("OK");
+
+                                            btResposta2.setVisibility(View.INVISIBLE);
+                                            btResposta1.setVisibility(View.INVISIBLE);
+                                            btSortir.setVisibility(View.INVISIBLE);
+                                            btSeguent.setVisibility(View.INVISIBLE);
+
+                                            txtUltimasDiapos.setVisibility(View.INVISIBLE);
+
+                                            btResposta3.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    PerfilUsuari pu = new PerfilUsuari();
+
+                                                    Bundle bundle = new Bundle();
+                                                    bundle.putInt("puntsObtinguts", puntsObtinguts);
+                                                    bundle.putInt("monedesObtingudes", monedesObtingudes);
+                                                    bundle.putBoolean("cambi", true);
+
+                                                    pu.setArguments(bundle);
+
+                                                    Categories quartFragment = new Categories();
+
+                                                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                                    transaction.replace(R.id.cursos_fragment_container, quartFragment);
+                                                    transaction.addToBackStack(null);
+                                                    transaction.commit();
+                                                }
+                                            });
+
+                                        }
+                                        else{
+                                            int puntsRandom = (int) (Math.random()*50+50);
+                                            int monedesRandom = (int) (Math.random()*50+50);
+
+                                            puntsObtinguts += puntsRandom;
+                                            monedesObtingudes += monedesRandom;
+
+                                            //if(ultimaDiapo == 1){
+                                                if(ultimaDiapo == maximDiapo-1){
+                                                    btSeguent.setText("Finalitzar");
+                                                }
+                                                ultimaDiapo += 1;
+                                                txtUltimasDiapos.setText(String.valueOf(ultimaDiapo) + "/" + String.valueOf(maximDiapo));
+                                                txtTitul.setText("Titol del exercici " + String.valueOf(ultimaDiapo));
+
+                                                btResposta1.setBackgroundColor(Color.parseColor("#53BF2D"));
+                                                btResposta2.setBackgroundColor(Color.parseColor("#53BF2D"));
+                                                btResposta3.setBackgroundColor(Color.parseColor("#53BF2D"));
+
+                                                List<String> listRespostes = Arrays.asList(respostes);
+                                                Collections.shuffle(listRespostes);
+                                                listRespostes.toArray(respostes);
+
+                                                btResposta1.setText(respostes[0]);
+                                                btResposta2.setText(respostes[1]);
+                                                btResposta3.setText(respostes[2]);
+                                            //}
+
+                                        }
+
+                                    }
+                                });
+
+                        snackbar.show();
                     }
+
+
+
                 }
 
-            }
+
         });
 
         btResposta1.setOnClickListener(new View.OnClickListener() {
@@ -152,16 +289,9 @@ public class Activitat1 extends Fragment{
                     btResposta2.setBackgroundColor(Color.parseColor("#53BF2D"));
                     btResposta3.setBackgroundColor(Color.parseColor("#53BF2D"));
 
-                    if(btSeguent.getText().equals("Comprobar")){
+                    if(btResposta1.isClickable()){
+                        resposta = btResposta1.getText().toString();
                         btSeguent.setEnabled(true);
-                        if(btSeguent.isClickable()){
-                            if(btResposta1.getText().equals(respostaCorrecte)){
-                                Snackbar.make(v, "Correcte", Snackbar.LENGTH_LONG).show();
-                            }
-                            else{
-                                Snackbar.make(v, "Incorrecte", Snackbar.LENGTH_LONG).show();
-                            }
-                        }
                     }
 
                 }
@@ -177,16 +307,9 @@ public class Activitat1 extends Fragment{
                     btResposta1.setBackgroundColor(Color.parseColor("#53BF2D"));
                     btResposta3.setBackgroundColor(Color.parseColor("#53BF2D"));
 
-                    if(btSeguent.getText().equals("Comprobar")){
+                    if(btResposta2.isClickable()){
+                        resposta = btResposta2.getText().toString();
                         btSeguent.setEnabled(true);
-                        if(btSeguent.isClickable()){
-                            if(btResposta2.getText().equals(respostaCorrecte)){
-                                Snackbar.make(v, "Correcte", Snackbar.LENGTH_LONG).show();
-                            }
-                            else{
-                                Snackbar.make(v, "Incorrecte", Snackbar.LENGTH_LONG).show();
-                            }
-                        }
                     }
 
                 }
@@ -203,16 +326,9 @@ public class Activitat1 extends Fragment{
                     btResposta2.setBackgroundColor(Color.parseColor("#53BF2D"));
                     btResposta1.setBackgroundColor(Color.parseColor("#53BF2D"));
 
-                    if(btSeguent.getText().equals("Comprobar")){
+                    if(btResposta3.isClickable()){
+                        resposta = btResposta3.getText().toString();
                         btSeguent.setEnabled(true);
-                        if(btSeguent.isClickable()){
-                            if(btResposta3.getText().equals(respostaCorrecte)){
-                                Snackbar.make(v, "Correcte", Snackbar.LENGTH_LONG).show();
-                            }
-                            else{
-                                Snackbar.make(v, "Incorrecte", Snackbar.LENGTH_LONG).show();
-                            }
-                        }
                     }
 
                 }

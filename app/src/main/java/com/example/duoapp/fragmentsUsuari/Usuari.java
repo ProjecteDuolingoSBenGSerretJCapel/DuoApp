@@ -5,15 +5,19 @@ public class Usuari {
     private String ip;
     private String nom;
     private String contrasena;
+    private String monedes;
+    private String punts;
 
     public Usuari(){
 
     }
 
-    public Usuari(String ip, String nom, String contrasena){
+    public Usuari(String ip, String nom, String contrasena, String monedes, String punts){
         this.ip = ip;
         this.nom = nom;
         this.contrasena = contrasena;
+        this.monedes = monedes;
+        this.punts = punts;
     }
 
     public void setIp(String ip){
@@ -38,5 +42,21 @@ public class Usuari {
 
     public String getContrasena(){
         return this.contrasena;
+    }
+
+    public void setMonedes(String monedes){
+        this.monedes = monedes;
+    }
+
+    public String getMonedes(){
+        return this.monedes;
+    }
+
+    public void setPunts(String punts){
+        this.punts = punts;
+    }
+
+    public String getPunts(){
+        return punts;
     }
 }

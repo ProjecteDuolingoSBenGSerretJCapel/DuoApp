@@ -1,7 +1,9 @@
-<Usuari>
-    <Configure>
-        <Ip> </Ip>
-        <Nom> </Nom>
-        <Contrasena> </Contrasena>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Usuari>
+    <Configure id="1">
+        <Ip>1.1.1.11.</Ip>
+        <Nom>Samir</Nom>
+        <Contrasena>123</Contrasena>
+        <Monedes>200</Monedes>
+        <Punts>200000000</Punts>
     </Configure>
 </Usuari>

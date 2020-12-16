@@ -10,7 +10,7 @@
         android:id="@+id/txtMonedesUsuari"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" 500"
+        android:text="XXX"
         android:layout_gravity="top|left"
         android:textSize="15dp"
         android:textStyle="bold"
@@ -20,7 +20,7 @@
         android:id="@+id/txtPuntsUsuari"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2000 "
+        android:text="XXX"
         android:layout_gravity="top|right"
         android:textSize="15dp"
         android:textStyle="bold"
@@ -35,6 +35,7 @@
             android:id="@+id/categories"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:orientation="vertical">
 
             <com.google.android.material.card.MaterialCardView
