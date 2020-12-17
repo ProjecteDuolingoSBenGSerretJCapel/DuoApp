@@ -49,7 +49,7 @@ public class Activitat1 extends Fragment{
 
     private boolean totCorrecte = true;
 
-    private int monedesObtingudes, puntsObtinguts;
+    private int monedesObtingudes = 250, puntsObtinguts = 200;
 
     private EditText txtTraduir;
     private TextView txtTitulTraduir;
@@ -137,7 +137,8 @@ public class Activitat1 extends Fragment{
                                     @Override
                                     public void onClick(View view) {
                                         if(ultimaDiapo == maximDiapo){
-                                            txtTitul.setText("PUNTS OBTINGUTS, "+ monedesObtingudes +" Punts, MONEDES OBTINGUDES "+ puntsObtinguts +" Monedes");
+                                            monedesObtingudes = 250;
+                                            txtTitul.setText("PUNTS OBTINGUTS, " + puntsObtinguts + " Punts, MONEDES OBTINGUDES " + monedesObtingudes + " Monedes");
                                             btResposta3.setText("OK");
 
                                             btResposta2.setVisibility(View.INVISIBLE);
@@ -150,11 +151,9 @@ public class Activitat1 extends Fragment{
                                             btResposta3.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
-                                                    Intent i = new Intent(getActivity(), UsuariActivity.class);
-                                                    i.putExtra("puntsObtinguts", puntsObtinguts);
-                                                    i.putExtra("monedesObtingudes", monedesObtingudes);
-                                                    i.putExtra("cambi", true);
-
+                                                    PerfilUsuari pu = new PerfilUsuari();
+                                                    pu.setTotCorrecte(true);
+                                                    pu.setCambi(true);
                                                     Categories quartFragment = new Categories();
 
                                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -166,12 +165,6 @@ public class Activitat1 extends Fragment{
 
                                         }
                                         else{
-                                            int puntsRandom = (int) (Math.random()*50+50);
-                                            int monedesRandom = (int) (Math.random()*50+50);
-
-                                            puntsObtinguts += puntsRandom;
-                                            monedesObtingudes += monedesRandom;
-
                                             if(ultimaDiapo == 5){
                                                 if(ultimaDiapo == maximDiapo-1){
                                                     btSeguent.setText("Finalitzar");
@@ -220,13 +213,96 @@ public class Activitat1 extends Fragment{
                                                         if(respostaCorrecte.equalsIgnoreCase(r)){
                                                             System.out.println("Si");
                                                             System.out.println(r);
+
+                                                            Snackbar snackbar = Snackbar
+                                                                    .make(container, "Correcte", Snackbar.LENGTH_LONG)
+                                                                    .setAction("SEGUENT", new View.OnClickListener() {
+                                                                        @Override
+                                                                        public void onClick(View view) {
+                                                                            if(ultimaDiapo == maximDiapo) {
+                                                                                //monedesObtingudes += 150;
+
+                                                                                txtTitul.setText("PUNTS OBTINGUTS, " + puntsObtinguts + " Punts, MONEDES OBTINGUDES " + monedesObtingudes + " Monedes");
+                                                                                btSeguent.setText("OK");
+
+                                                                                btResposta2.setVisibility(View.INVISIBLE);
+                                                                                btResposta1.setVisibility(View.INVISIBLE);
+                                                                                btSortir.setVisibility(View.INVISIBLE);
+                                                                                btResposta3.setVisibility(View.INVISIBLE);
+
+                                                                                txtUltimasDiapos.setVisibility(View.INVISIBLE);
+
+                                                                                txtTitulTraduir.setVisibility(View.INVISIBLE);
+                                                                                txtTraduir.setVisibility(View.INVISIBLE);
+
+                                                                                btSeguent.setOnClickListener(new View.OnClickListener() {
+                                                                                    @Override
+                                                                                    public void onClick(View v) {
+                                                                                        PerfilUsuari pu = new PerfilUsuari();
+                                                                                        pu.setTotCorrecte(true);
+                                                                                        pu.setCambi(true);
+
+                                                                                        Categories quartFragment = new Categories();
+
+                                                                                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                                                                        transaction.replace(R.id.cursos_fragment_container, quartFragment);
+                                                                                        transaction.addToBackStack(null);
+                                                                                        transaction.commit();
+                                                                                    }
+                                                                                });
+                                                                            }
+                                                                        }
+                                                                    });
+                                                            snackbar.show();
                                                         }
                                                         else{
                                                             System.out.println("No");
                                                             System.out.println(r);
+
+                                                            Snackbar snackbar = Snackbar
+                                                                    .make(container, "Incorrecte", Snackbar.LENGTH_LONG)
+                                                                    .setAction("SEGUENT", new View.OnClickListener() {
+                                                                        @Override
+                                                                        public void onClick(View view) {
+                                                                            if(ultimaDiapo == maximDiapo) {
+                                                                                monedesObtingudes = 100;
+
+                                                                                txtTitul.setText("PUNTS OBTINGUTS, " + puntsObtinguts + " Punts, MONEDES OBTINGUDES " + monedesObtingudes + " Monedes");
+                                                                                btSeguent.setText("OK");
+
+                                                                                btResposta2.setVisibility(View.INVISIBLE);
+                                                                                btResposta1.setVisibility(View.INVISIBLE);
+                                                                                btResposta3.setVisibility(View.INVISIBLE);
+                                                                                btSortir.setVisibility(View.INVISIBLE);
+
+                                                                                txtUltimasDiapos.setVisibility(View.INVISIBLE);
+
+                                                                                txtTitulTraduir.setVisibility(View.INVISIBLE);
+                                                                                txtTraduir.setVisibility(View.INVISIBLE);
+
+                                                                                btSeguent.setOnClickListener(new View.OnClickListener() {
+                                                                                    @Override
+                                                                                    public void onClick(View v) {
+                                                                                        PerfilUsuari pu = new PerfilUsuari();
+                                                                                        pu.setTotCorrecte(false);
+                                                                                        pu.setCambi(true);
+
+                                                                                        Categories quartFragment = new Categories();
+
+                                                                                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                                                                        transaction.replace(R.id.cursos_fragment_container, quartFragment);
+                                                                                        transaction.addToBackStack(null);
+                                                                                        transaction.commit();
+                                                                                    }
+                                                                                });
+                                                                            }
+                                                                        }
+                                                                    });
+                                                            snackbar.show();
                                                         }
                                                     }
                                                 });
+
                                                 btResposta1.setVisibility(View.INVISIBLE);
                                                 btResposta2.setVisibility(View.INVISIBLE);
                                                 btResposta3.setVisibility(View.INVISIBLE);
@@ -248,25 +324,24 @@ public class Activitat1 extends Fragment{
                                     @Override
                                     public void onClick(View view) {
                                         if(ultimaDiapo == maximDiapo){
-                                            monedesObtingudes += 150;
+                                            monedesObtingudes = 100;
 
-                                            txtTitul.setText("PUNTS OBTINGUTS, "+ monedesObtingudes +" Punts, MONEDES OBTINGUDES "+ puntsObtinguts +" Monedes");
-                                            btResposta3.setText("OK");
+                                            txtTitul.setText("PUNTS OBTINGUTS, " + puntsObtinguts + " Punts, MONEDES OBTINGUDES " + monedesObtingudes + " Monedes");
+                                            btSortir.setText("OK");
 
                                             btResposta2.setVisibility(View.INVISIBLE);
                                             btResposta1.setVisibility(View.INVISIBLE);
-                                            btSortir.setVisibility(View.INVISIBLE);
+                                            btResposta3.setVisibility(View.INVISIBLE);
                                             btSeguent.setVisibility(View.INVISIBLE);
 
                                             txtUltimasDiapos.setVisibility(View.INVISIBLE);
 
-                                            btResposta3.setOnClickListener(new View.OnClickListener() {
+                                            btSortir.setOnClickListener(new View.OnClickListener() {
                                                 @Override
                                                 public void onClick(View v) {
-                                                    Intent i = new Intent(getActivity(), UsuariActivity.class);
-                                                    i.putExtra("puntsObtinguts", 100);
-                                                    i.putExtra("monedesObtingudes", 100);
-                                                    i.putExtra("cambi", true);
+                                                    PerfilUsuari pu = new PerfilUsuari();
+                                                    pu.setTotCorrecte(false);
+                                                    pu.setCambi(true);
 
                                                     Categories quartFragment = new Categories();
 
@@ -282,8 +357,8 @@ public class Activitat1 extends Fragment{
                                             int puntsRandom = (int) (Math.random()*50+50);
                                             int monedesRandom = (int) (Math.random()*50+50);
 
-                                            puntsObtinguts += puntsRandom;
-                                            monedesObtingudes += monedesRandom;
+                                            //puntsObtinguts += puntsRandom;
+                                            //monedesObtingudes += monedesRandom;
 
                                             if(ultimaDiapo == 5){
                                                 if(ultimaDiapo == maximDiapo-1){
@@ -332,10 +407,93 @@ public class Activitat1 extends Fragment{
                                                         if(respostaCorrecte.equalsIgnoreCase(r)){
                                                             System.out.println("Si");
                                                             System.out.println(r);
+
+                                                            Snackbar snackbar = Snackbar
+                                                                    .make(container, "Correcte", Snackbar.LENGTH_LONG)
+                                                                    .setAction("SEGUENT", new View.OnClickListener() {
+                                                                        @Override
+                                                                        public void onClick(View view) {
+                                                                            if(ultimaDiapo == maximDiapo) {
+                                                                                monedesObtingudes = 100;
+
+                                                                                txtTitul.setText("PUNTS OBTINGUTS, " + puntsObtinguts + " Punts, MONEDES OBTINGUDES " + monedesObtingudes + " Monedes");
+
+                                                                                btSeguent.setText("OK");
+
+                                                                                btResposta2.setVisibility(View.INVISIBLE);
+                                                                                btResposta1.setVisibility(View.INVISIBLE);
+                                                                                btSortir.setVisibility(View.INVISIBLE);
+                                                                                btResposta3.setVisibility(View.INVISIBLE);
+
+                                                                                txtUltimasDiapos.setVisibility(View.INVISIBLE);
+
+                                                                                txtTitulTraduir.setVisibility(View.INVISIBLE);
+                                                                                txtTraduir.setVisibility(View.INVISIBLE);
+
+                                                                                btSeguent.setOnClickListener(new View.OnClickListener() {
+                                                                                    @Override
+                                                                                    public void onClick(View v) {
+                                                                                        PerfilUsuari pu = new PerfilUsuari();
+                                                                                        pu.setTotCorrecte(false);
+                                                                                        pu.setCambi(true);
+
+                                                                                        Categories quartFragment = new Categories();
+
+                                                                                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                                                                        transaction.replace(R.id.cursos_fragment_container, quartFragment);
+                                                                                        transaction.addToBackStack(null);
+                                                                                        transaction.commit();
+                                                                                    }
+                                                                                });
+                                                                            }
+                                                                        }
+                                                                    });
+                                                            snackbar.show();
                                                         }
                                                         else{
                                                             System.out.println("No");
                                                             System.out.println(r);
+
+                                                            Snackbar snackbar = Snackbar
+                                                                    .make(container, "Incorrecte", Snackbar.LENGTH_LONG)
+                                                                    .setAction("SEGUENT", new View.OnClickListener() {
+                                                                        @Override
+                                                                        public void onClick(View view) {
+                                                                            if(ultimaDiapo == maximDiapo) {
+                                                                                monedesObtingudes = 100;
+
+                                                                                txtTitul.setText("PUNTS OBTINGUTS, " + puntsObtinguts + " Punts, MONEDES OBTINGUDES " + monedesObtingudes + " Monedes");
+                                                                                btSeguent.setText("OK");
+
+                                                                                btResposta2.setVisibility(View.INVISIBLE);
+                                                                                btResposta1.setVisibility(View.INVISIBLE);
+                                                                                btResposta3.setVisibility(View.INVISIBLE);
+                                                                                btSortir.setVisibility(View.INVISIBLE);
+
+                                                                                txtUltimasDiapos.setVisibility(View.INVISIBLE);
+
+                                                                                txtTitulTraduir.setVisibility(View.INVISIBLE);
+                                                                                txtTraduir.setVisibility(View.INVISIBLE);
+
+                                                                                btSeguent.setOnClickListener(new View.OnClickListener() {
+                                                                                    @Override
+                                                                                    public void onClick(View v) {
+                                                                                        PerfilUsuari pu = new PerfilUsuari();
+                                                                                        pu.setTotCorrecte(false);
+                                                                                        pu.setCambi(true);
+
+                                                                                        Categories quartFragment = new Categories();
+
+                                                                                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                                                                        transaction.replace(R.id.cursos_fragment_container, quartFragment);
+                                                                                        transaction.addToBackStack(null);
+                                                                                        transaction.commit();
+                                                                                    }
+                                                                                });
+                                                                            }
+                                                                        }
+                                                                    });
+                                                            snackbar.show();
                                                         }
                                                     }
                                                 });

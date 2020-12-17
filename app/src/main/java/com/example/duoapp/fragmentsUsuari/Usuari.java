@@ -5,14 +5,14 @@ public class Usuari {
     private String ip;
     private String nom;
     private String contrasena;
-    private String monedes;
-    private String punts;
+    private int monedes;
+    private int punts;
 
     public Usuari(){
 
     }
 
-    public Usuari(String ip, String nom, String contrasena, String monedes, String punts){
+    public Usuari(String ip, String nom, String contrasena, int monedes, int punts){
         this.ip = ip;
         this.nom = nom;
         this.contrasena = contrasena;
@@ -44,19 +44,19 @@ public class Usuari {
         return this.contrasena;
     }
 
-    public void setMonedes(String monedes){
+    public void setMonedes(int monedes){
         this.monedes = monedes;
     }
 
-    public String getMonedes(){
+    public int getMonedes(){
         return this.monedes;
     }
 
-    public void setPunts(String punts){
+    public void setPunts(int punts){
         this.punts = punts;
     }
 
-    public String getPunts(){
+    public int getPunts(){
         return punts;
     }
 }

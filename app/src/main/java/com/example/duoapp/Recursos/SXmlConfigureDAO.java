@@ -17,7 +17,7 @@ public interface SXmlConfigureDAO {
     public NodeList returnNodeListByDocument(Document doc, String tag);
     public Element setElementByNode(Node node);
     public boolean modificarXML(Document document, String aModificar, String valorAModificar);
-    public void guardarXML(Document document, String path, File file, String novaIp, String nouNom, String novaContrasena, String monedes, String punts) throws TransformerException, ParserConfigurationException;
+    public void guardarXML(Document document, String path, File file, String novaIp, String nouNom, String novaContrasena, int monedes, int punts) throws TransformerException, ParserConfigurationException;
     public String getValueTag(Element element, String valor);
 
 }

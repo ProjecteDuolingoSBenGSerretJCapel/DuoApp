@@ -52,7 +52,7 @@ public class SXmlConfigureImpl implements SXmlConfigureDAO{
                 elementName.appendChild(textNom);
 
                 Element elementContrasena = dUsuari.createElement("Contrasena");
-                Text textContrasena = dUsuari.createTextNode("contrasena");
+                Text textContrasena = dUsuari.createTextNode("samirbenbouker");
 
                 elementContrasena.appendChild(textContrasena);
 
@@ -121,7 +121,7 @@ public class SXmlConfigureImpl implements SXmlConfigureDAO{
     }
 
     @Override
-    public void guardarXML(Document document, String path, File file, String novaIp, String nouNom, String novaContrasena, String monedes, String punts) throws TransformerException, ParserConfigurationException {
+    public void guardarXML(Document document, String path, File file, String novaIp, String nouNom, String novaContrasena, int monedes, int punts) throws TransformerException, ParserConfigurationException {
         if(file.exists()){
             file.delete();
 
@@ -152,12 +152,12 @@ public class SXmlConfigureImpl implements SXmlConfigureDAO{
                 elementContrasena.appendChild(textContrasena);
 
                 Element elementMonedes = dUsuari.createElement("Monedes");
-                Text textMonedes = dUsuari.createTextNode(monedes);
+                Text textMonedes = dUsuari.createTextNode(String.valueOf(monedes));
 
                 elementMonedes.appendChild(textMonedes);
 
                 Element elementPunts = dUsuari.createElement("Punts");
-                Text textPunts = dUsuari.createTextNode(punts);
+                Text textPunts = dUsuari.createTextNode(String.valueOf(punts));
 
                 elementPunts.appendChild(textPunts);
 
